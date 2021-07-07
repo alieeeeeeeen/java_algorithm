@@ -41,15 +41,19 @@ public class Percolation {
         openCount++;
         if (index == 1) {
             uf.union(index, top);
-        } else if (index == size - 1) {
+        } else if (index == size) {
             uf.union(index, bottom);
-        } else if ((i - 1) >= 0 && (i - 1) < size && isOpen(i - 1, j)) {
+        }
+        if ((i - 1) >= 0 && (i - 1) < size && isOpen(i - 1, j)) {
             union(i, j, i - 1, j);
-        } else if ((i + 1) >= 0 && (i + 1) < size && isOpen(i + 1, j)) {
+        }
+        if ((i + 1) >= 0 && (i + 1) < size && isOpen(i + 1, j)) {
             union(i, j, i + 1, j);
-        } else if ((j - 1) >= 0 && (j - 1) < size && isOpen(i, j - 1)) {
+        }
+        if ((j - 1) >= 0 && (j - 1) < size && isOpen(i, j - 1)) {
             union(i, j, i, j - 1);
-        } else if ((j + 1) >= 0 && (j + 1) < size  && isOpen(i, j + 1)) {
+        }
+        if ((j + 1) >= 0 && (j + 1) < size  && isOpen(i, j + 1)) {
             union(i, j, i, j + 1);
         }
     }
