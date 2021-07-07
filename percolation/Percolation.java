@@ -45,7 +45,7 @@ public class Percolation {
             uf.union(index, top);
             backwashUF.union(index, top);
         }
-        if (j == size - 1) {
+        if (i == size - 1) {
             backwashUF.union(index, bottom);
         }
         if ((i - 1) >= 0 && (i - 1) < size && isOpen(i - 1, j)) {
