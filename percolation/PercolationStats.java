@@ -6,9 +6,9 @@ import edu.princeton.cs.algs4.StdStats;
 
 public class PercolationStats {
     // perform independent trials on an n-by-n grid
+    private static final double CONSTANT_VAL = 1.96;
     private final int trials;
     private final double[] fractions;
-    private static double NUMBER = 1.96;
 
     public PercolationStats(int n, int trials) {
         if (n <= 0 || trials <= 0) {
@@ -41,11 +41,11 @@ public class PercolationStats {
 
     // low endpoint of 95% confidence interval
     public double confidenceLo() {
-        return (mean() - NUMBER * stddev() / Math.sqrt(trials));
+        return (mean() - CONSTANT_VAL * stddev() / Math.sqrt(trials));
     }
 
     // high endpoint of 95% confidence interval
-    public double confidenceHi() { return (mean() + NUMBER * stddev() / Math.sqrt(trials)); }
+    public double confidenceHi() { return (mean() + CONSTANT_VAL * stddev() / Math.sqrt(trials)); }
 
     // test client (see below)
     public static void main(String[] args) {
@@ -54,6 +54,6 @@ public class PercolationStats {
         PercolationStats stats = new PercolationStats(n, trials);
         StdOut.println("mean                    = " + stats.mean());
         StdOut.println("stddev                  = " + stats.stddev());
-        StdOut.println("95% confidence interval = " + stats.confidenceLo() + ", ");
+        StdOut.println("95% confidence interval = " + stats.confidenceLo() + ", " + stats.confidenceHi());
     }
 }
