@@ -8,7 +8,7 @@ public class Percolation {
     private int top;
     private int bottom;
     private boolean[] isOpened;
-    private int openCount;
+    private int openCount = 0;
 
     // creates n-by-n grid, with all sites initially blocked
     public Percolation(int n) {
