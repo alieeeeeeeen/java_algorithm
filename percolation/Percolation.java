@@ -2,11 +2,11 @@ package percolation;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
-    private WeightedQuickUnionUF uf;
-    private WeightedQuickUnionUF backwashUF;
-    private int size;
-    private int top;
-    private int bottom;
+    private final WeightedQuickUnionUF uf;
+    private final WeightedQuickUnionUF backwashUF;
+    private final int size;
+    private final int top;
+    private final int bottom;
     private boolean[] isOpened;
     private int openCount;
 

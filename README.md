@@ -7,10 +7,21 @@ There are some assignments for the course and here are my solutions.
 Note that the repo is only for reference and inspiration. Please do not use for the cheating.
 
 
+# The Score
+
 algorithm | score
 --- | ---- 
 Hello world | 93 / 100
-Percolation | ? / 100
+Percolation | 99 / 100
+
+
+# Assignment
+
+## Percolation
+
+
+
+
 
 
 
