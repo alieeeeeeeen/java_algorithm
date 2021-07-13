@@ -22,8 +22,10 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     public Deque() {
-        first = null;
-        last = null;
+        first = new Node(null);
+        last = new Node(null);
+        first.next = last;
+        last.prev = first;
         size = 0;
     }
 
@@ -43,13 +45,12 @@ public class Deque<Item> implements Iterable<Item> {
             throw new IllegalArgumentException();
         }
         Node newFirst = new Node(item);
-        newFirst.prev = null;
-        if(first == null) {
-            newFirst.next = last;
-            first = newFirst;
+        if(first.item == null) {
+            first.item = newFirst.item;
         } else {
             first.prev = newFirst;
             first.prev.next = first;
+            first = newFirst;
         }
         size++;
     }
@@ -60,14 +61,13 @@ public class Deque<Item> implements Iterable<Item> {
             throw new IllegalArgumentException();
         }
         Node newLast = new Node(item);
-        newLast.next = null;
-        if(last == null) {
-            last = newLast;
-            last.prev = first;
+        if(last.item == null) {
+            last.item = newLast.item;
         } else {
             last.next = newLast;
+            last.next.prev = last;
+            last = newLast;
         }
-        StdOut.println(last.prev.item);
         size++;
     }
 
@@ -105,7 +105,7 @@ public class Deque<Item> implements Iterable<Item> {
 
         @Override
         public boolean hasNext() {
-            return current.next != null;
+            return current != null;
         }
 
         @Override
@@ -113,9 +113,9 @@ public class Deque<Item> implements Iterable<Item> {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
-            StdOut.println("test inner " + current.next.item);
+            Item item = current.item;
             current = current.next;
-            return current.item;
+            return item;
         }
 
         @Override
@@ -132,21 +132,24 @@ public class Deque<Item> implements Iterable<Item> {
         d1.addFirst(1);
         d1.addLast(2);
 
+        d1.addFirst(3);
+        d1.addLast(4);
+
         // Test FirstElement
-        assertEquals(new Integer(1), d1.first.item);
+        assertEquals(new Integer(3), d1.first.item);
 
         // Test LastElement
-        assertEquals(new Integer(2), d1.last.item);
+        assertEquals(new Integer(4), d1.last.item);
 
         // Test the size of queue
-        assertEquals(2, d1.size());
+        assertEquals(4, d1.size());
 
         // Test each item
-        Integer[] items = {1, 2};
+        Integer[] items = {3, 1, 2, 4};
         int i = 0;
-        for (Integer item: d1) {
-            StdOut.println(i + ":" + item);
-            assertEquals(item, items[i]);
+        for(Integer item: d1) {
+            StdOut.println(item);
+            assertEquals(items[i], item);
             i++;
         }
     }
