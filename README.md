@@ -46,6 +46,10 @@ To be honest, the implementation of Deque(deck) is quite easy, but the unit test
 
 To test each method, we should use [Junit 4](https://junit.org/junit4/) or [Junit 5](https://junit.org/junit5/)
 
+#### Somethiong we must notice that:
+* Since we override the iterator in the Queue, so we can use the for loop for(<> Item: Queue)
+* In iterator method, the `next` must return the current value, the `hasNext` must return the next value
+
 
 
     
