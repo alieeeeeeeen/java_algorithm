@@ -22,8 +22,9 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     public Deque() {
-        first = new Node(null);
-        last = new Node(null);
+        first = null;
+        last = null;
+        size = 0;
     }
 
     // is the deque empty?
@@ -43,9 +44,13 @@ public class Deque<Item> implements Iterable<Item> {
         }
         Node newFirst = new Node(item);
         newFirst.prev = null;
-        first.prev = newFirst;
-        first.prev.next = first;
-        first = newFirst;
+        if(first == null) {
+            newFirst.next = last;
+            first = newFirst;
+        } else {
+            first.prev = newFirst;
+            first.prev.next = first;
+        }
         size++;
     }
 
@@ -56,9 +61,13 @@ public class Deque<Item> implements Iterable<Item> {
         }
         Node newLast = new Node(item);
         newLast.next = null;
-        last.next = newLast;
-        last.next.prev = last;
-        last = newLast;
+        if(last == null) {
+            last = newLast;
+            last.prev = first;
+        } else {
+            last.next = newLast;
+        }
+        StdOut.println(last.prev.item);
         size++;
     }
 
@@ -104,6 +113,7 @@ public class Deque<Item> implements Iterable<Item> {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
+            StdOut.println("test inner " + current.next.item);
             current = current.next;
             return current.item;
         }
@@ -117,12 +127,10 @@ public class Deque<Item> implements Iterable<Item> {
     // unit testing (required)
     @Test
     public static void main(String[] args) {
-        StdOut.println("test");
         Deque<Integer> d1 = new Deque<Integer>();
         // size
         d1.addFirst(1);
         d1.addLast(2);
-        assertEquals(2, d1.size());
 
         // Test FirstElement
         assertEquals(new Integer(1), d1.first.item);
@@ -132,5 +140,14 @@ public class Deque<Item> implements Iterable<Item> {
 
         // Test the size of queue
         assertEquals(2, d1.size());
+
+        // Test each item
+        Integer[] items = {1, 2};
+        int i = 0;
+        for (Integer item: d1) {
+            StdOut.println(i + ":" + item);
+            assertEquals(item, items[i]);
+            i++;
+        }
     }
 }
