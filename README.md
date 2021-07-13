@@ -27,7 +27,7 @@ Percolation | 98 / 100
     * throw new IllegalArgumentException
 * The repetitive open sites
     * check whether a site is open or not
-* The [backwash](https://www.cs.princeton.edu/courses/archive/spring19/cos226/assignments/percolation/checklist.php) scenario
+* The [backwash](https://introcs.cs.princeton.edu/java/assignments/checklist/percolation.html) scenario
     * Using two array to store the site
         * one array stores all sites
         * the other array stores the sites other than the bottom site
