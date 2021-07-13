@@ -15,7 +15,7 @@ Hello world | 93 / 100
 Percolation | 98 / 100
 
 
-# Assignment
+# Assignments
 ## Percolation
 * [Reference](https://coursera.cs.princeton.edu/algs4/assignments/percolation/specification.php)
 
@@ -27,7 +27,7 @@ Percolation | 98 / 100
     * throw new IllegalArgumentException
 * The repetitive open sites
     * check whether a site is open or not
-* The backwash scenario
+* The [backwash](https://www.cs.princeton.edu/courses/archive/spring19/cos226/assignments/percolation/checklist.php) scenario
     * Using two array to store the site
         * one array stores all sites
         * the other array stores the sites other than the bottom site
