@@ -42,7 +42,7 @@ Percolation | 98 / 100
     * [Unit tests for priority queue](http://cda.morris.umn.edu/~elenam/2101Spring2016/examples/unit_tests_pq.html)
     * [Queue Tests](https://sites.cs.ucsb.edu/~cappello/56/code/L9/QueueTest.html)
 
-To be honest, the implementation of Deque(deck) is quite simple, but the difficult thing is the unit test.
+To be honest, the implementation of Deque(deck) is quite easy, but the unit test is quite difficult.
 
 To test each method, we should use [Junit 4](https://junit.org/junit4/) or [Junit 5](https://junit.org/junit5/)
 
