@@ -42,7 +42,7 @@ public class Deque<Item> implements Iterable<Item> {
             throw new IllegalArgumentException();
         }
         Node newFirst = new Node(item);
-        newFirst.next = first;
+        newFirst.prev = null;
         first.prev = newFirst;
         first.prev.next = first;
         first = newFirst;
@@ -129,5 +129,8 @@ public class Deque<Item> implements Iterable<Item> {
 
         // Test LastElement
         assertEquals(new Integer(2), d1.last.item);
+
+        // Test the size of queue
+        assertEquals(2, d1.size());
     }
 }
