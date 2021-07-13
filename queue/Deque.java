@@ -2,8 +2,10 @@ package queue;
 
 import edu.princeton.cs.algs4.StdOut;
 
+import static org.junit.Assert.*;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import org.junit.Test;
 
 public class Deque<Item> implements Iterable<Item> {
     private Node first, last;
@@ -22,8 +24,6 @@ public class Deque<Item> implements Iterable<Item> {
     public Deque() {
         first = new Node(null);
         last = new Node(null);
-        first.next = last;
-        last.prev = first;
     }
 
     // is the deque empty?
@@ -44,6 +44,8 @@ public class Deque<Item> implements Iterable<Item> {
         Node newFirst = new Node(item);
         newFirst.next = first;
         first.prev = newFirst;
+        first.prev.next = first;
+        first = newFirst;
         size++;
     }
 
@@ -53,8 +55,10 @@ public class Deque<Item> implements Iterable<Item> {
             throw new IllegalArgumentException();
         }
         Node newLast = new Node(item);
+        newLast.next = null;
         last.next = newLast;
-        newLast.prev = last;
+        last.next.prev = last;
+        last = newLast;
         size++;
     }
 
@@ -111,10 +115,19 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     // unit testing (required)
+    @Test
     public static void main(String[] args) {
         StdOut.println("test");
         Deque<Integer> d1 = new Deque<Integer>();
+        // size
         d1.addFirst(1);
         d1.addLast(2);
+        assertEquals(2, d1.size());
+
+        // Test FirstElement
+        assertEquals(new Integer(1), d1.first.item);
+
+        // Test LastElement
+        assertEquals(new Integer(2), d1.last.item);
     }
 }

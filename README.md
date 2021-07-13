@@ -33,6 +33,21 @@ Percolation | 98 / 100
         * the other array stores the sites other than the bottom site
 * The test case from the Coursera assumes that the row and col starts from 1 to n;
 
+## Queue
+
+### Unit Testing
+#### Reference:
+
+* Test Cases
+    * [Unit tests for priority queue](http://cda.morris.umn.edu/~elenam/2101Spring2016/examples/unit_tests_pq.html)
+    * [Queue Tests](https://sites.cs.ucsb.edu/~cappello/56/code/L9/QueueTest.html)
+
+To be honest, the implementation of Deque(deck) is quite simple, but the difficult thing is the unit test.
+
+To test each method, we should use [Junit 4](https://junit.org/junit4/) or [Junit 5](https://junit.org/junit5/)
+
+
+
     
     
     
