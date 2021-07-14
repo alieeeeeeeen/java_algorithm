@@ -1,15 +1,11 @@
 package queue;
 
-import edu.princeton.cs.algs4.StdOut;
 
-import static org.junit.Assert.*;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import org.junit.Test;
 
 public class Deque<Item> implements Iterable<Item> {
     private Node first, last;
-    private Deque<Item> deque;
     private int size;
 
     private class Node {
@@ -22,10 +18,8 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     public Deque() {
-        first = new Node(null);
-        last = new Node(null);
-        first.next = last;
-        last.prev = first;
+        first = null;
+        last = null;
         size = 0;
     }
 
@@ -44,13 +38,14 @@ public class Deque<Item> implements Iterable<Item> {
         if (item == null) {
             throw new IllegalArgumentException();
         }
-        Node newFirst = new Node(item);
-        if(first.item == null) {
-            first.item = newFirst.item;
+        Node node = new Node(item);
+        if (isEmpty()) {
+            first = node;
+            last = first;
         } else {
-            first.prev = newFirst;
-            first.prev.next = first;
-            first = newFirst;
+            node.next = first;
+            first.prev = node;
+            first = node;
         }
         size++;
     }
@@ -60,39 +55,52 @@ public class Deque<Item> implements Iterable<Item> {
         if (item == null) {
             throw new IllegalArgumentException();
         }
-        Node newLast = new Node(item);
-        if(last.item == null) {
-            last.item = newLast.item;
+        Node node = new Node(item);
+        if (isEmpty()) {
+            last = node;
+            first = last;
         } else {
-            last.next = newLast;
-            last.next.prev = last;
-            last = newLast;
+            node.prev = last;
+            last.next = node;
+            last = node;
         }
         size++;
     }
 
     // remove and return the item from the front
     public Item removeFirst() {
-        if(size == 0) {
+        if (size == 0) {
             throw new NoSuchElementException();
         }
-        Node oldFirst = first;
-        first.next.prev = null;
-        first.next = null;
+        Node node = first;
+        if (size() == 1) {
+            first = null;
+            last = null;
+        } else {
+            first.next.prev = null;
+            first = first.next;
+        }
+        node.next = null;
         size--;
-        return oldFirst.item;
+        return node.item;
     }
 
     // remove and return the item from the back
     public Item removeLast() {
-        if(size == 0) {
+        if (size == 0) {
             throw new NoSuchElementException();
         }
-        Node oldLast = last;
-        last.prev.next = null;
-        last.prev = null;
+        Node node = last;
+        if (size() == 1) {
+            first = null;
+            last = null;
+        } else {
+            last.prev.next = null;
+            last = last.prev;
+        }
+        node.next = null;
         size--;
-        return oldLast.item;
+        return node.item;
     }
 
     // return an iterator over items in order from front to back
@@ -125,31 +133,57 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     // unit testing (required)
-    @Test
     public static void main(String[] args) {
-        Deque<Integer> d1 = new Deque<Integer>();
-        // size
-        d1.addFirst(1);
-        d1.addLast(2);
+//        Deque<Integer> d1 = new Deque<Integer>();
+//        // size
+//        d1.addFirst(1);
+//        d1.addLast(2);
+//
+//        d1.addFirst(3);
+//        d1.addLast(4);
+//
+//        // Test FirstElement
+//        StdOut.println(3 == d1.first.item);
+//
+//        // Test LastElement
+//        StdOut.println(4 == d1.last.item);
+//
+//        // Test the size of queue
+//        StdOut.println(4 == d1.size());
+//
+//        // Test each item
+//        Integer[] items = {3, 1, 2, 4};
+//        int i = 0;
+//        for (Integer item: d1) {
+//            StdOut.println(items[i] == item);
+//            i++;
+//        }
 
-        d1.addFirst(3);
-        d1.addLast(4);
+//
+//        Deque<Integer> deque = new Deque<>();
+//        deque.isEmpty()  ;
+//        deque.addFirst(2);
+//        deque.removeFirst() ;
+//        deque.isEmpty()      ;
+//        deque.addFirst(5);
+//        deque.removeFirst();
 
-        // Test FirstElement
-        assertEquals(new Integer(3), d1.first.item);
+//        Deque<Integer> deque = new Deque<>();
+//        deque.addFirst(1);
+//        deque.removeLast()     ;
+//        deque.addFirst(3);
+//        StdOut.println(deque.removeLast()     );
 
-        // Test LastElement
-        assertEquals(new Integer(4), d1.last.item);
 
-        // Test the size of queue
-        assertEquals(4, d1.size());
-
-        // Test each item
-        Integer[] items = {3, 1, 2, 4};
-        int i = 0;
-        for(Integer item: d1) {
-            assertEquals(items[i], item);
-            i++;
-        }
+//        Deque<Integer> deque = new Deque<>();
+//        deque.addLast(1);
+//        deque.addLast(2);
+//        deque.addFirst(3);
+//        deque.addFirst(4);
+//        deque.addFirst(5);
+//        deque.size()           ;
+//        deque.addFirst(7);
+//        deque.addLast(8);
+//        StdOut.println(deque.last.item);
     }
 }
