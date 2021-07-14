@@ -148,7 +148,6 @@ public class Deque<Item> implements Iterable<Item> {
         Integer[] items = {3, 1, 2, 4};
         int i = 0;
         for(Integer item: d1) {
-            StdOut.println(item);
             assertEquals(items[i], item);
             i++;
         }
