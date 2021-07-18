@@ -1,9 +1,11 @@
 package collinear;
 
 import edu.princeton.cs.algs4.StdDraw;
+import edu.princeton.cs.algs4.StdOut;
+
 import java.util.Comparator;
 
-public class Point {
+public class Point implements Comparable<Point> {
     private final int x, y;
 
     public Point(int x, int y) {
@@ -24,13 +26,7 @@ public class Point {
     }
 
     public int compareTo(Point that) {
-        if(this.y < that.y || ((this.y == that.y) && (this.x < that.x))) {
-            return -1;
-        }
-        if (this.y > that.y) {
-            return 1;
-        }
-        return 0;
+        return this.y == that.y ? this.x - that.x : this.y - that.y;
     }
 
     public double slopeTo(Point that) {
@@ -38,7 +34,10 @@ public class Point {
             return this.y == that.y ?
                     Double.NEGATIVE_INFINITY : Double.POSITIVE_INFINITY;
         }
-        return (that.y - this.y) / (that.x - this.x);
+        if (this.y == that.y) {
+            return 0.0;
+        }
+        return (this.y - that.y) * 1.0 / (this.x - that.x);
     }
 
     public Comparator<Point> slopeOrder() {
@@ -54,13 +53,7 @@ public class Point {
 
         @Override
         public int compare(Point p1, Point p2) {
-            if(this.point.slopeTo(p1) > this.point.slopeTo(p2)) {
-                return -1;
-            }
-            if(this.point.slopeTo(p1) < this.point.slopeTo(p2)) {
-                return 1;
-            }
-            return 0;
+            return Double.compare(slopeTo(p1), slopeTo(p2));
         }
     }
 }
