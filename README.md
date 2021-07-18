@@ -61,7 +61,7 @@ To test each method, we should use [Junit 4](https://junit.org/junit4/) or [Juni
 ## BruteCollinearPoints
 ### Something we must notice that:
 * For the `BruteCollinear`, there is a mention in the doc that `For simplicity, we will not supply any input to BruteCollinearPoints that has 5 or more collinear points`.
-Therefore, we can use 4 loops to iterator the points and compare the slopes of two points.
+Therefore, we can use 4 loops to iterator the points and compare the slopes of two points. Besides, as the brute name suggested, we can totally use 4 loops in the code.
   
 
     
