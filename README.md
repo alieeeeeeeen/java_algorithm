@@ -64,8 +64,8 @@ To test each method, we should use [Junit 4](https://junit.org/junit4/) or [Juni
 Therefore, we can use 4 loops to iterator the points and compare the slopes of two points. Besides, as the `brute` name suggested, we can totally use 4 loops in the code.
 * For the `BruteCollinear`, the test code is in the [Sample client](https://coursera.cs.princeton.edu/algs4/assignments/collinear/specification.php) section. 
 
-    
-    
+## FastCollinearPoints
+* Using `do-while` for the time that we must execute the logic code then check the condition.
     
 
 
