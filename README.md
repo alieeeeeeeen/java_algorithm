@@ -66,7 +66,7 @@ Therefore, we can use 4 loops to iterator the points and compare the slopes of t
 * For the `BruteCollinear`, the test code is in the [Sample client](https://coursera.cs.princeton.edu/algs4/assignments/collinear/specification.php) section. 
 
 ## FastCollinearPoints
-* Using `do-while` for the time that we must execute the logic code then check the condition.
+* Using `do-while` for the time that we must execute the logic code first then check the condition.
 * Using our customize `comparator` to sort the points.
 
 
