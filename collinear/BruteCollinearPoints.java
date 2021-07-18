@@ -53,7 +53,7 @@ public class BruteCollinearPoints {
     }
 
     public LineSegment[] segments() {
-        return lines;
+        return lines.clone();
     }
 
     public static void main(String[] args) {

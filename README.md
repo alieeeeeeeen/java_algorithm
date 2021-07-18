@@ -14,6 +14,7 @@ algorithm | score
 Hello world | 93 / 100
 Percolation | 98 / 100
 Deque | 94 / 100
+Collinear | 91 / 100
 
 
 # Assignments
