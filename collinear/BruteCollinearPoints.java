@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class BruteCollinearPoints {
-    private LineSegment[] lines;
+    private final LineSegment[] lines;
 
     public BruteCollinearPoints(Point[] points) {
         if (points == null) {
@@ -25,7 +25,7 @@ public class BruteCollinearPoints {
 
         ArrayList<LineSegment> ls = new ArrayList<>();
 
-        for(int i = 0; i < sortedPoints.length - 3; i++) {
+        for (int i = 0; i < sortedPoints.length - 3; i++) {
             Point p1 = sortedPoints[i];
              for (int j = i + 1; j < sortedPoints.length - 2; j++) {
                 Point p2 = sortedPoints[j];
