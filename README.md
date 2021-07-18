@@ -66,7 +66,7 @@ Therefore, we can use 4 loops to iterator the points and compare the slopes of t
 
 ## FastCollinearPoints
 * Using `do-while` for the time that we must execute the logic code then check the condition.
-    
+* Using our customize `comparator` to sort the points.
 
 
 
