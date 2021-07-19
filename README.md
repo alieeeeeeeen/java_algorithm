@@ -21,7 +21,7 @@ Collinear | 94 / 100
 ## Percolation
 * [Reference](https://coursera.cs.princeton.edu/algs4/assignments/percolation/specification.php)
 
-### Something We must notice that:
+### Notice that:
 * The corner case:
     * the argument must be positive integer
     * the open site must be inside the n*n grid
@@ -48,7 +48,7 @@ To be honest, the implementation of Deque(deck) is quite easy, but the unit test
 
 To test each method, we should use [Junit 4](https://junit.org/junit4/) or [Junit 5](https://junit.org/junit5/)
 
-#### Something we must notice that:
+#### Notice that:
 * Since we override the iterator in the Queue, so we can use the for loop for
   ```
     for (<Generic> Item: Queue) {}
@@ -60,7 +60,7 @@ To test each method, we should use [Junit 4](https://junit.org/junit4/) or [Juni
 ## Collinear
 
 ## BruteCollinearPoints
-### Something we must notice that:
+### Notice that:
 * For the `BruteCollinear`, there is a mention in the doc that `For simplicity, we will not supply any input to BruteCollinearPoints that has 5 or more collinear points`.
 Therefore, we can use 4 loops to iterator the points and compare the slopes of two points. Besides, as the `brute` name suggested, we can totally use 4 loops in the code.
 * For the `BruteCollinear`, the test code is in the [Sample client](https://coursera.cs.princeton.edu/algs4/assignments/collinear/specification.php) section. 
@@ -68,6 +68,9 @@ Therefore, we can use 4 loops to iterator the points and compare the slopes of t
 ## FastCollinearPoints
 * Using `do-while` for the time that we must execute the logic code first then check the condition.
 * Using our customize `comparator` to sort the points.
+* the `compareTo` method in the class `Point` is the invoking point compares to the argument point. It is invoked when we sort the array. Therefore, the points sort according to their position.
+* In the array of backupPoints, we must check that if the p1 is less than the last point.
+
 
 
 

@@ -24,6 +24,7 @@ public class Point implements Comparable<Point> {
         return "(" + this.x + ", " + this.y + ")";
     }
 
+    @Override
     public int compareTo(Point that) {
         return this.y == that.y ? this.x - that.x : this.y - that.y;
     }
