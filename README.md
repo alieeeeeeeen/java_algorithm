@@ -66,7 +66,7 @@ Therefore, we can use 4 loops to iterator the points and compare the slopes of t
 * For the `BruteCollinear`, the test code is in the [Sample client](https://coursera.cs.princeton.edu/algs4/assignments/collinear/specification.php) section. 
 
 ## FastCollinearPoints
-* Using `do-while` for the time that we must execute the logic code first then check the condition.
+* Using `do-while` for the time when we must execute the logic code first then check the condition.
 * Using our customize `comparator` to sort the points.
 * the `compareTo` method in the class `Point` is the invoking point comparing to the argument point. It is invoked when we sort the array. Therefore, the points sort according to their position.
 * In the array of backupPoints, we must check that if the p1 is less than the last point.
