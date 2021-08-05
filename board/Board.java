@@ -57,6 +57,10 @@ public class Board {
         }
         Board that = (Board) y;
 
+        if (this.dimension != that.dimension) {
+            return false;
+        }
+
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
                  if (tiles[i][j] != that.tiles[i][j]) {
