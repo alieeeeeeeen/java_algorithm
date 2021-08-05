@@ -27,6 +27,21 @@ public class Board {
 
     // number of tiles out of place
     public int hamming() {
+        int count = 0;
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < tiles[i].length; j++) {
+                if (tiles[i][j] != i * dimension + j + 1) {
+                    count++;
+                } else {
+                    continue;
+                }
+            }
+        }
+        return count;
+    }
+
+    // sum of Manhattan distances between tiles and goal
+    public int manhattan() {
         int move = 0;
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
@@ -41,9 +56,6 @@ public class Board {
         }
         return move;
     }
-
-    // sum of Manhattan distances between tiles and goal
-    public int manhattan()
 
     // is this board the goal board?
     public boolean isGoal() {
