@@ -31,7 +31,15 @@ public class Board {
 
     // string representation of this board
     public String toString() {
-
+        StringBuilder builder = new StringBuilder();
+        builder.append(dimension).append("\n");
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < tiles[i].length; j++) {
+                builder.append(String.format("%2d ", tiles[i][j]));
+            }
+            builder.append("\n");
+        }
+        return builder.toString();
     }
 
     // board dimension n
