@@ -2,6 +2,7 @@ package board;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Board {
     // create a board from an n-by-n array of tiles,
@@ -52,7 +53,7 @@ public class Board {
         int count = 0;
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
-                if (tiles[i][j] != i * dimension + j + 1) {
+                if (tiles[i][j] != 0 && tiles[i][j] != (i * dimension) + j + 1) {
                     count++;
                 } else {
                     continue;
