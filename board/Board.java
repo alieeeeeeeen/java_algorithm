@@ -16,7 +16,7 @@ public class Board {
             throw new NullPointerException();
         }
 
-        this.tiles = tiles.clone();
+        this.tiles = copyOf(tiles);
         dimension = this.tiles.length;
 
         for (int i = 0; i < dimension; i++) {
@@ -117,25 +117,25 @@ public class Board {
     public Iterable<Board> neighbors() {
         List<Board> neighbours = new ArrayList<>();
         if (blankRow > 0) {
-            int [][] north = tiles.clone();
+            int [][] north = copyOf(tiles);
             swap(north, blankRow, blankCol, blankRow - 1, blankCol);
             neighbours.add(new Board(north));
         }
 
         if (blankRow < dimension - 1) {
-            int [][] south = tiles.clone();
+            int [][] south = copyOf(tiles);
             swap(south, blankRow, blankCol, blankRow + 1, blankCol);
             neighbours.add(new Board(south));
         }
 
         if (blankCol > 0) {
-            int [][] east = tiles.clone();
+            int [][] east = copyOf(tiles);
             swap(east, blankRow, blankCol, blankRow, blankCol - 1);
             neighbours.add(new Board(east));
         }
 
         if (blankCol < dimension - 1) {
-            int [][] west = tiles.clone();
+            int [][] west = copyOf(tiles);
             swap(west, blankRow, blankCol, blankRow, blankCol + 1);
             neighbours.add(new Board(west));
         }
@@ -145,12 +145,26 @@ public class Board {
 
     // a board that is obtained by exchanging any pair of tiles
     public Board twin() {
-
+        int [][] pair = copyOf(tiles);
+        if (blankRow != 0) {
+            swap(pair, 0, 0, 0, 1);
+        } else {
+            swap(pair, 1, 0, 1, 1);
+        }
+        return new Board(pair);
     }
 
     private void swap (int [][] v, int rowA, int colA, int rowB, int colB) {
         int tmp = v[rowA][colA];
         v[rowA][colA] = v[rowB][colB];
         v[rowB][colB] = tmp;
+    }
+
+    private int[][] copyOf(int[][] matrix) {
+        int[][] clone = new int[matrix.length][];
+        for (int i = 0; i < matrix.length; i++) {
+            clone[i] = matrix[i].clone();
+        }
+        return clone;
     }
 }
