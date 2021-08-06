@@ -15,6 +15,7 @@ Hello world | 93 / 100
 Percolation | 98 / 100
 Deque | 94 / 100
 Collinear | 94 / 100
+8 Puzzler | 94 / 100
 
 
 # Assignments
@@ -71,9 +72,10 @@ Therefore, we can use 4 loops to iterator the points and compare the slopes of t
 * the `compareTo` method in the class `Point` is the invoking point comparing to the argument point. It is invoked when we sort the array. Therefore, the points sort according to their position.
 * In the array of backupPoints, we must check that if the p1 is less than the last point.
 
-
-
-
+## 8 Puzzler
+* The Hamming priority is the Hamming distance of a board plus the number of moves made so far to get to the search node. Intuitively, a search node with a small number of tiles in the wrong position is close to the goal, and we prefer a search node if has been reached using a small number of moves.
+* The Manhattan priority is the Manhattan distance of a board plus the number of moves made so far to get to the search node.
+* Priority queue
 
 
 

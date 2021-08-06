@@ -2,7 +2,6 @@ package board;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class Board {
     // create a board from an n-by-n array of tiles,
