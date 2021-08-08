@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.TreeSet;
 
 public class PointSET {
-    TreeSet<Point2D> points;
+    private TreeSet<Point2D> points;
     public PointSET() {
         points = new TreeSet<>();
     }
@@ -29,6 +29,7 @@ public class PointSET {
     }
 
     public boolean contains(Point2D p) {
+        checkNull(p);
         return points.contains(p);
     }
 
@@ -48,15 +49,16 @@ public class PointSET {
     }
 
     public Point2D nearest(Point2D p) {
+        checkNull(p);
         Double minDistance = Double.POSITIVE_INFINITY;
-        Point2D cloesetPoint = null;
+        Point2D closePoint = null;
         for (Point2D that: points) {
             if (p.distanceSquaredTo(that) < minDistance) {
                 minDistance = p.distanceSquaredTo(that);
-                cloesetPoint = that;
+                closePoint = that;
             }
         }
-        return cloesetPoint;
+        return closePoint;
     }
 
     private void checkNull(Object obj) {
