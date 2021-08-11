@@ -1,8 +1,8 @@
 package kdtree;
 
-import collinear.Point;
-import edu.princeton.cs.algs4.*;
-import org.w3c.dom.css.Rect;
+import edu.princeton.cs.algs4.Point2D;
+import edu.princeton.cs.algs4.RectHV;
+import edu.princeton.cs.algs4.StdDraw;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,13 +41,13 @@ public class KdTree {
 
         private RectHV nextRight() {
             return sepr == Separator.VERTICAL ?
-                new RectHV(p.x(), rect.ymin(), rect.xmax(), rect.ymax()):
+                new RectHV(p.x(), rect.ymin(), rect.xmax(), rect.ymax()) :
                     new RectHV(rect.xmin(), p.y(), rect.xmax(), rect.ymax());
         }
 
         private RectHV nextLeft() {
             return sepr == Separator.VERTICAL ?
-                    new RectHV(rect.xmin(), rect.ymin(), p.x(), rect.ymax()):
+                    new RectHV(rect.xmin(), rect.ymin(), p.x(), rect.ymax()) :
                     new RectHV(rect.xmin(), rect.ymin(), rect.xmax(), p.y());
         }
     }
@@ -163,12 +163,10 @@ public class KdTree {
         }
 
         if (node.isLeft(new Point2D(rect.xmin(), rect.ymin())) && node.left != null) {
-            if (rect.contains(node.p)) result.add(node.p);
             rangeOver(node.left, rect, result);
         }
 
         if (!node.isLeft(new Point2D(rect.xmax(), rect.ymax())) && node.right != null) {
-            if (rect.contains(node.p)) result.add(node.p);
             rangeOver(node.right, rect, result);
         }
     }

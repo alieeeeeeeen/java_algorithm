@@ -16,6 +16,7 @@ Percolation | 98 / 100
 Deque | 94 / 100
 Collinear | 94 / 100
 8 Puzzler | 94 / 100
+Kdtree | 92 / 100
 
 
 # Assignments
@@ -77,6 +78,9 @@ Therefore, we can use 4 loops to iterator the points and compare the slopes of t
 * The Manhattan priority is the Manhattan distance of a board plus the number of moves made so far to get to the search node.
 * Priority queue
 
-
+## Kdtree
+***note that***: Plz read meticulously about the specification, it virtually gives a hit about how to implement the kdtree.
+* Range search. To find all points contained in a given query rectangle, start at the root and recursively search for points in both subtrees using the following pruning rule: if the query rectangle does not intersect the rectangle corresponding to a node, there is no need to explore that node (or its subtrees). A subtree is searched only if it might contain a point contained in the query rectangle.
+* Nearest-neighbor search. To find a closest point to a given query point, start at the root and recursively search in both subtrees using the following pruning rule: if the closest point discovered so far is closer than the distance between the query point and the rectangle corresponding to a node, there is no need to explore that node (or its subtrees). That is, search a node only only if it might contain a point that is closer than the best one found so far. The effectiveness of the pruning rule depends on quickly finding a nearby point. To do this, organize the recursive method so that when there are two possible subtrees to go down, you always choose the subtree that is on the same side of the splitting line as the query point as the first subtree to explore—the closest point found while exploring the first subtree may enable pruning of the second subtree.
 
 
