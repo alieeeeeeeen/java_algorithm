@@ -1,7 +1,11 @@
 package kdtree;
 
+import collinear.Point;
 import edu.princeton.cs.algs4.*;
 import org.w3c.dom.css.Rect;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class KdTree {
 
@@ -140,13 +144,35 @@ public class KdTree {
         }
         return false;
     }
-//
-//    public Iterable<Point2D> range(RectHV rect) {
-//        checkNull(rect);
-//    }
-//
-//    private void addAll(Node node, RectHV rect, List<Point2D> results) {
-//    }
+
+    public Iterable<Point2D> range(RectHV rect) {
+        checkNull(rect);
+        List<Point2D> result = new ArrayList<>();
+
+        rangeOver(root, rect, result);
+        return result;
+    }
+
+    public void rangeOver(Node node, RectHV rect, List<Point2D> result) {
+        if (node == null) {
+            return;
+        }
+
+        if (rect.contains(node.p)) {
+            result.add(node.p);
+        }
+
+        if (node.isLeft(new Point2D(rect.xmin(), rect.ymin())) && node.left != null) {
+            if (rect.contains(node.p)) result.add(node.p);
+            rangeOver(node.left, rect, result);
+        }
+
+        if (!node.isLeft(new Point2D(rect.xmax(), rect.ymax())) && node.right != null) {
+            if (rect.contains(node.p)) result.add(node.p);
+            rangeOver(node.right, rect, result);
+        }
+    }
+
 //
 //    public Point2D nearest(Point2D p) {
 //        checkNull(p);
@@ -164,25 +190,102 @@ public class KdTree {
         }
     }
 
+//    public static void main(String[] args) {
+//        RectHV rect = new RectHV(0.0, 0.0, 1.0, 1.0);
+//        StdDraw.enableDoubleBuffering();
+//        KdTree kdtree = new KdTree();
+//
+//        In in = new In(args[0]);
+//
+//        while (!in.isEmpty()) {
+//            double x = in.readDouble();
+//            double y = in.readDouble();
+//
+//            Point2D p = new Point2D(x, y);
+//            if (rect.contains(p)) {
+//                StdOut.printf("%8.6f %8.6f\n", x, y);
+//                kdtree.insert(p);
+//                StdDraw.clear();
+//                kdtree.draw();
+//                StdDraw.show();
+//            }
+//            StdDraw.pause(20);
+//        }
+//    }
+
     public static void main(String[] args) {
-        RectHV rect = new RectHV(0.0, 0.0, 1.0, 1.0);
-        StdDraw.enableDoubleBuffering();
+        // initialize the data structures from file
+        String filename = args[0];
+        In in = new In(filename);
+        PointSET brute = new PointSET();
         KdTree kdtree = new KdTree();
-
-        In in = new In(args[0]);
-
         while (!in.isEmpty()) {
             double x = in.readDouble();
             double y = in.readDouble();
-
             Point2D p = new Point2D(x, y);
-            if (rect.contains(p)) {
-                StdOut.printf("%8.6f %8.6f\n", x, y);
-                kdtree.insert(p);
-                StdDraw.clear();
-                kdtree.draw();
-                StdDraw.show();
+            kdtree.insert(p);
+            brute.insert(p);
+        }
+
+        double x0 = 0.0, y0 = 0.0;      // initial endpoint of rectangle
+        double x1 = 0.0, y1 = 0.0;      // current location of mouse
+        boolean isDragging = false;     // is the user dragging a rectangle
+
+        // draw the points
+        StdDraw.clear();
+        StdDraw.setPenColor(StdDraw.BLACK);
+        StdDraw.setPenRadius(0.01);
+        brute.draw();
+        StdDraw.show();
+
+        // process range search queries
+        StdDraw.enableDoubleBuffering();
+        while (true) {
+
+            // user starts to drag a rectangle
+            if (StdDraw.isMousePressed() && !isDragging) {
+                x0 = x1 = StdDraw.mouseX();
+                y0 = y1 = StdDraw.mouseY();
+                isDragging = true;
             }
+
+            // user is dragging a rectangle
+            else if (StdDraw.isMousePressed() && isDragging) {
+                x1 = StdDraw.mouseX();
+                y1 = StdDraw.mouseY();
+            }
+
+            // user stops dragging rectangle
+            else if (!StdDraw.isMousePressed() && isDragging) {
+                isDragging = false;
+            }
+
+            // draw the points
+            StdDraw.clear();
+            StdDraw.setPenColor(StdDraw.BLACK);
+            StdDraw.setPenRadius(0.01);
+            brute.draw();
+
+            // draw the rectangle
+            RectHV rect = new RectHV(Math.min(x0, x1), Math.min(y0, y1),
+                    Math.max(x0, x1), Math.max(y0, y1));
+            StdDraw.setPenColor(StdDraw.BLACK);
+            StdDraw.setPenRadius();
+            rect.draw();
+
+//            // draw the range search results for brute-force data structure in red
+            StdDraw.setPenRadius(0.03);
+            StdDraw.setPenColor(StdDraw.RED);
+            for (Point2D p : brute.range(rect))
+                p.draw();
+
+            // draw the range search results for kd-tree in blue
+            StdDraw.setPenRadius(0.02);
+            StdDraw.setPenColor(StdDraw.BLUE);
+            for (Point2D p : kdtree.range(rect))
+                p.draw();
+
+            StdDraw.show();
             StdDraw.pause(20);
         }
     }
