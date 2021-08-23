@@ -5,28 +5,27 @@ import edu.princeton.cs.algs4.*;
 public class SAP {
     // constructor takes a digraph (not necessarily a DAG)
     private final Digraph G;
-    private int ancestor;
 
     public SAP(Digraph G) {
         if (G == null) throw new NullPointerException();
         this.G = new Digraph(G);
-        this.ancestor = -1;
     }
 
     // length of shortest ancestral path between v and w; -1 if no such path
     public int length(int v, int w) {
-        int ancestor = ancestor(v, w);
-        if (ancestor == -1) return -1;
+        int a = ancestor(v, w);
+        if (a == -1) return -1;
         BreadthFirstDirectedPaths bfv = new BreadthFirstDirectedPaths(G, v);
         BreadthFirstDirectedPaths bfw = new BreadthFirstDirectedPaths(G, w);
 
-        int length1 = bfv.distTo(ancestor);
-        int length2 = bfw.distTo(ancestor);
+        int length1 = bfv.distTo(a);
+        int length2 = bfw.distTo(a);
         return length1 + length2;
     }
 
     // a common ancestor of v and w that participates in a shortest ancestral path; -1 if no such path
     public int ancestor(int v, int w) {
+        StdOut.println("ancestor");
         BreadthFirstDirectedPaths bf = new BreadthFirstDirectedPaths(G, v);
         return predecessor(bf, w);
     }
@@ -34,13 +33,12 @@ public class SAP {
     private int predecessor(BreadthFirstDirectedPaths bf, int w) {
         for (int vertex: G.adj(w)) {
             if (bf.hasPathTo(vertex)) {
-                ancestor = vertex;
-                break;
+                return vertex;
             } else {
-                predecessor(bf, vertex);
+                return predecessor(bf, vertex);
             }
         }
-        return ancestor;
+        return -1;
     }
 
     // length of shortest ancestral path between any vertex in v and any vertex in w; -1 if no such path
