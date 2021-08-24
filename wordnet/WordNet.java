@@ -1,10 +1,11 @@
 package wordnet;
 
 
-import edu.princeton.cs.algs4.Bag;
 import edu.princeton.cs.algs4.Digraph;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.ST;
+import edu.princeton.cs.algs4.Bag;
+
 
 public class WordNet {
 
@@ -15,7 +16,7 @@ public class WordNet {
     private SAP sap;
 
     public WordNet(String synsets, String hypernyms) {
-        if (synsets == null || hypernyms == null) throw new NullPointerException("Null input.");
+        if (synsets == null || hypernyms == null) throw new IllegalArgumentException();
 
         this.synsets = new ST<>();
         this.words = new ST<>();
@@ -53,7 +54,6 @@ public class WordNet {
         }
 
         sap = new SAP(g);
-
     }
 
     // returns all WordNet nouns
@@ -63,12 +63,14 @@ public class WordNet {
 
     // is the word a WordNet noun?
     public boolean isNoun(String word) {
-        if (word == null) throw new NullPointerException();
+        if (word == null) throw new IllegalArgumentException();
         return words.contains(word);
     }
 
     // distance between nounA and nounB (defined below)
     public int distance(String nounA, String nounB) {
+        validateNoun(nounA, nounB);
+
         Iterable<Integer> a = words.get(nounA);
         Iterable<Integer> b = words.get(nounB);
         return sap.length(a, b);
@@ -77,9 +79,21 @@ public class WordNet {
     // a synset (second field of synsets.txt) that is the common ancestor of nounA and nounB
     // in a shortest ancestral path (defined below)
     public String sap(String nounA, String nounB) {
+        validateNoun(nounA, nounB);
+
         Iterable<Integer> a = words.get(nounA);
         Iterable<Integer> b = words.get(nounB);
         return synsets.get(sap.ancestor(a, b));
+    }
+
+
+    private void validateNoun(String a, String b) {
+        if (!isNoun(a)) {
+            throw new IllegalArgumentException();
+        }
+        if (!isNoun(b)) {
+            throw new IllegalArgumentException();
+        }
     }
 
     // do unit testing of this class
