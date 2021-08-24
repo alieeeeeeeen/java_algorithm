@@ -17,6 +17,7 @@ Deque | 94 / 100
 Collinear | 94 / 100
 8 Puzzler | 94 / 100
 Kdtree | 92 / 100
+wordnet | 97 / 100
 
 
 # Assignments
