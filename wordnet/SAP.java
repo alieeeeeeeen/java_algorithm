@@ -2,10 +2,6 @@ package wordnet;
 
 import edu.princeton.cs.algs4.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
-
 public class SAP {
     // constructor takes a digraph (not necessarily a DAG)
     private final Digraph G;
