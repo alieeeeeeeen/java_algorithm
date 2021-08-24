@@ -1,6 +1,10 @@
 package wordnet;
 
-import edu.princeton.cs.algs4.*;
+
+import edu.princeton.cs.algs4.Bag;
+import edu.princeton.cs.algs4.Digraph;
+import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.ST;
 
 public class WordNet {
 
